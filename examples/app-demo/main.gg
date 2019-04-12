@@ -1,0 +1,90 @@
+
+packages {
+    eloq: packages/eloquent,
+}
+
+alias {
+    ctrl: controllers
+    dmp.ctrl: modules.dmp.controllers
+}
+
+$c = 'test';
+
+ctrl.Main.action()
+
+-------------
+
+controllers/Main.gg
+class Main {
+    
+    action(){
+        User $user;
+        $user->settings();
+        $user = new models.User();
+        if($user->last_order == Time::format("Y-M-D", Time::now())){
+            printf("today");
+        }
+    }
+}
+
+-------------
+
+models/User.gg
+class User {
+
+    string $firstname;
+    string $lastname;
+    string $password;
+    string $email;
+    string $settingsJson;
+
+    func init(*User $user){
+    }
+
+    func settings(User $user) : Object {
+        $data = Json::decode($user->settingsJson);
+        return $data;
+    }
+
+    func query() : Object {
+        return new eloq:Query('users', User::queryResult);
+    }
+
+    func queryResult(Object $data) : User {
+        $user = new User();
+        $user->firstname = $data->firstname;
+
+        return $user;
+    }
+
+    func save(User $u) : Bool {
+        eloq:('users');
+    }
+}
+
+-------------
+
+packages/eloquent/Query.gg
+class Query {
+
+    *func $resultHandler;
+    string $table;
+
+    func init(Query $query, string $table, *func $resultHandler = null){
+        $query->resultHandler = $resultHandler;
+        $query->table = $table;
+        return $query;
+    }
+
+    func where(string $col, string $sign, Any $value){
+    }
+}
+
+-------------
+
+packages/eloquent/subclasses/BaseModel.gg
+class BaseModel {
+
+    func init(){
+    }
+}

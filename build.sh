@@ -1,0 +1,2 @@
+time clang++ src/compiler/packageCompiler.cpp src/compiler/lexer.cpp src/compiler/main.cpp `llvm-config --cxxflags --ldflags --system-libs --libs core` -o build/gg
+time ./build/gg run examples/basic/main.gg

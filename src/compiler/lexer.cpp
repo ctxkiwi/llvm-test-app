@@ -4,7 +4,7 @@
 double Lexer::NumVal;
 std::string Lexer::IdentifierStr; 
 
-// Gettok - Return the next token from standard input.
+// getToken - Return the next token
 int Lexer::getToken() {
   static int LastChar = ' ';
 
