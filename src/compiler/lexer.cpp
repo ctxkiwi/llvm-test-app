@@ -1,8 +1,9 @@
 
 #include "lexer.h"
 
-double Lexer::NumVal;
-std::string Lexer::IdentifierStr; 
+Lexer::Lexer(){
+  code = "";
+}
 
 // getToken - Return the next token
 int Lexer::getToken() {

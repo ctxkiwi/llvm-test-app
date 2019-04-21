@@ -8,8 +8,9 @@
 class Lexer {
  public:
   //
-  static std::string IdentifierStr;  // Filled in if tok_identifier
-  static double NumVal;              // Filled in if tok_number
+  std::string IdentifierStr;  // Filled in if tok_identifier
+  double NumVal;              // Filled in if tok_number
+  std::string code;
 
   // The lexer returns tokens [0-255] if it is an unknown character, otherwise
   // one of these for known things.
@@ -25,6 +26,7 @@ class Lexer {
     tok_number = -5,
   };
 
-  static int getToken();
+  int getToken();
+  Lexer();
 
 };
