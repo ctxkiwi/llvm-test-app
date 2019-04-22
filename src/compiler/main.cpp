@@ -12,11 +12,9 @@
 #include <string>
 #include <vector>
 
-#include "llvm/ADT/STLExtras.h"
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
-#include "llvm/Support/raw_ostream.h"
 
 #include "lexer.h"
 #include "packageCompiler.h"
@@ -24,7 +22,6 @@
 static llvm::LLVMContext mainContext;
 static llvm::IRBuilder<> Builder(mainContext);
 static std::unique_ptr<llvm::Module> mainModule;
-static std::map<char, int> BinopPrecedence;
 
 bool fileExists (const std::string& name) {
   if (FILE *file = fopen(name.c_str(), "r")) {
@@ -110,13 +107,6 @@ int main(int argc, char *argv[]) {
       pkgCompiler->compileFile(file);
     }
   }
-
-  // Install standard binary operators.
-  // 1 is lowest precedence.
-  BinopPrecedence['<'] = 10;
-  BinopPrecedence['+'] = 20;
-  BinopPrecedence['-'] = 20;
-  BinopPrecedence['*'] = 40; // highest.
 
   // Print out IR code
   mainModule->print(llvm::errs(), nullptr);
