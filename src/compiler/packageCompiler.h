@@ -14,6 +14,7 @@ class PackageCompiler {
   // Functions
   static PackageCompiler* create(std::string rootDir);
   void compileFile(std::string file);
+  void loadFile(std::string file);
 
  private:
 

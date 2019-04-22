@@ -13,7 +13,7 @@ PackageCompiler* PackageCompiler::create(std::string rootDir){
   return pc;
 }
 
-void PackageCompiler::compileFile(std::string file){
+void PackageCompiler::loadFile(std::string file){
 
   auto path = directory + file;
 
@@ -29,5 +29,11 @@ void PackageCompiler::compileFile(std::string file){
 
   std::string newCode = fileGetContents(path);
   lexer->code += "\n" + newCode;
+
+}
+
+void PackageCompiler::compileFile(std::string file){
+
+  loadFile(file);
 
 }
