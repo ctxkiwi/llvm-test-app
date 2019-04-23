@@ -31,7 +31,7 @@ llvm::Value *BinaryExprAST::codegen() {
     // Convert bool 0/1 to double 0.0 or 1.0
     return Builder.CreateUIToFP(L, llvm::Type::getDoubleTy(mainContext), "booltmp");
   default:
-    printf("Invalid binary operator: %s", Op);
+    printf("Invalid binary operator: %s", &Op);
     exit (EXIT_FAILURE);
     // return LogErrorV("invalid binary operator");
   }

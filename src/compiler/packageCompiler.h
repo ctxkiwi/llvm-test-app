@@ -1,7 +1,6 @@
 
 #ifndef PACKAGE_C_H
 #define PACKAGE_C_H
-#endif
 
 #include <map>
 #include <vector>
@@ -41,3 +40,5 @@ class PackageCompiler {
   bool parsing = false;
 
 };
+
+#endif

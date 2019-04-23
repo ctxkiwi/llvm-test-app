@@ -1,7 +1,6 @@
 
 #ifndef AST_H
 #define AST_H
-#endif
 
 #include <string>
 
@@ -56,3 +55,5 @@ class BinaryExprAST : public ExprAST {
 
   llvm::Value *codegen() override;
 };
+
+#endif
