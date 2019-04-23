@@ -9,13 +9,12 @@
 #include "functions.h"
 #include "packageCompiler.h"
 
-
-// Standard binary operators.
-// 1 is lowest precedence.
-PackageCompiler::BinopPrecedence['<'] = 10;
-PackageCompiler::BinopPrecedence['+'] = 20;
-PackageCompiler::BinopPrecedence['-'] = 20;
-PackageCompiler::BinopPrecedence['*'] = 40;  // highest.
+std::map<char, int> PackageCompiler::binopPrecedence = {
+    {'<', 10},
+    {'+', 20},
+    {'-', 20},
+    {'*', 40},
+};
 
 PackageCompiler* PackageCompiler::create(std::string rootDir){
   PackageCompiler* pc = new PackageCompiler();
@@ -62,7 +61,7 @@ void PackageCompiler::parseCode(){
   while (true) {
 
     curToken = lexer->getNextToken();
-    printf("Tkn: %d", curToken);
+    // printf("Tkn: %d", curToken);
 
     switch (curToken) {
       case Lexer::tok_eof:
@@ -77,7 +76,7 @@ void PackageCompiler::parseCode(){
         // HandleExtern();
         break;
       default:
-        // HandleTopLevelExpression();
+        handleTopLevelExpr();
         break;
     }
   }
@@ -119,7 +118,7 @@ std::unique_ptr<ExprAST> PackageCompiler::parsePrimary() {
   case Lexer::tok_identifier:
     // return ParseIdentifierExpr();
   case Lexer::tok_number:
-    // return ParseNumberExpr();
+    return parseNumberExpr();
   case '(':
     // return ParseParenExpr();
   default:
@@ -161,13 +160,21 @@ std::unique_ptr<ExprAST> PackageCompiler::parseBinOpRHS(int ExprPrec, std::uniqu
   }
 }
 
-int getTokenPrecedence() {
+int PackageCompiler::getTokenPrecedence() {
   if (!isascii(lexer->currentToken))
     return -1;
 
   // Make sure it's a declared binop.
-  int TokPrec = PackageCompiler::BinopPrecedence[lexer->currentToken];
+  int TokPrec = binopPrecedence[lexer->currentToken];
   if (TokPrec <= 0)
     return -1;
   return TokPrec;
 }
+
+// numberexpr ::= number
+std::unique_ptr<ExprAST> PackageCompiler::parseNumberExpr() {
+  auto Result = llvm::make_unique<NumberExprAST>(lexer->NumVal);
+  lexer->getNextToken(); // consume the number
+  return std::move(Result);
+}
+

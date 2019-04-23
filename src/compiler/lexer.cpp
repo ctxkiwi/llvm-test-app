@@ -7,7 +7,7 @@ Lexer::Lexer(){
 
 // getToken - Return the next token
 int Lexer::getNextToken() {
-  currentToken = getNextToken();
+  currentToken = getNextTokenReal();
   return currentToken;
 }
 
@@ -44,7 +44,7 @@ int Lexer::getNextTokenReal() {
       LastChar = getNextChar();
     } while (LastChar != EOF && LastChar != '\n' && LastChar != '\r');
 
-    if (LastChar != EOF) return Lexer::getNextToken();
+    if (LastChar != EOF) return getNextToken();
   }
   // Check for end of file.  Don't eat the EOF.
   if (LastChar == EOF) return Lexer::tok_eof;

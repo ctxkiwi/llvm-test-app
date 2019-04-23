@@ -15,17 +15,19 @@ class PackageCompiler {
 
   // Functions
   static PackageCompiler* create(std::string rootDir);
+
   void compileFile(std::string file);
   void loadFile(std::string file);
   void parseCode();
   void handleTopLevelExpr();
+
   std::unique_ptr<FunctionAST> parseTopLevelExpr();
   std::unique_ptr<ExprAST> parseExpression();
   std::unique_ptr<ExprAST> parsePrimary();
+  std::unique_ptr<ExprAST> parseNumberExpr();
   std::unique_ptr<ExprAST> parseBinOpRHS(int ExprPrec, std::unique_ptr<ExprAST> LHS);
 
-  static std::map<char, int> BinopPrecedence;
-
+  static std::map<char, int> binopPrecedence;
   int getTokenPrecedence();
 
  private:

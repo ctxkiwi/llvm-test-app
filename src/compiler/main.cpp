@@ -12,16 +12,11 @@
 #include <string>
 #include <vector>
 
-#include "llvm/IR/IRBuilder.h"
-#include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 
+#include "globals.h"
 #include "lexer.h"
 #include "packageCompiler.h"
-
-static llvm::LLVMContext mainContext;
-static llvm::IRBuilder<> Builder(mainContext);
-static std::unique_ptr<llvm::Module> mainModule;
 
 bool fileExists (const std::string& name) {
   if (FILE *file = fopen(name.c_str(), "r")) {
