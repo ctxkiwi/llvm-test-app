@@ -86,9 +86,9 @@ void PackageCompiler::handleTopLevelExpr() {
   // Evaluate a top-level expression into an anonymous function.
   if (auto FnAST = parseTopLevelExpr()) {
     if (auto *FnIR = FnAST->codegen()) {
-      fprintf(stderr, "Read top-level expression:");
-      FnIR->print(llvm::errs());
-      fprintf(stderr, "\n");
+      // fprintf(stderr, "Read top-level expression:");
+      // FnIR->print(llvm::errs());
+      // fprintf(stderr, "\n");
     }
   } else {
     // Skip token for error recovery.
