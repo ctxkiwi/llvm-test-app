@@ -1,7 +1,7 @@
 
 CC := clang++
 
-SRCDIR := src/test
+SRCDIR := src/compiler
 BUILDDIR := build
 TARGETDIR := bin
 TARGET := bin/test

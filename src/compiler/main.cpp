@@ -1,36 +1,8 @@
 
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <unistd.h>
-#include <algorithm>
-#include <cctype>
-#include <cstdio>
-#include <cstdlib>
-#include <map>
-#include <memory>
-#include <string>
-#include <vector>
-
-#include "llvm/IR/Module.h"
-
 #include "globals.h"
+#include "functions.h"
 #include "lexer.h"
 #include "packageCompiler.h"
-
-bool fileExists (const std::string& name) {
-  if (FILE *file = fopen(name.c_str(), "r")) {
-    fclose(file);
-    return true;
-  }
-  return false;
-}
-
-std::string fileGetContents(const std::string &name) {
-  std::ifstream ifs(name.c_str());
-  std::string content( (std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()) );
-  return content;
-}
 
 int main(int argc, char *argv[]) {
 
