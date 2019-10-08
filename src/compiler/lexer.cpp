@@ -1,4 +1,6 @@
 
+#include <string>
+
 #include "lexer.h"
 
 Lexer::Lexer(){

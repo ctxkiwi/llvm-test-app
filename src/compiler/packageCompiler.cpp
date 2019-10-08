@@ -1,8 +1,4 @@
 
-#include <memory>
-#include <vector>
-#include <set>
-
 #include "llvm/ADT/STLExtras.h"
 
 #include "lexer.h"

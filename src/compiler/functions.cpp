@@ -1,7 +1,5 @@
 
-#include <string>
 #include <fstream>
-
 #include "functions.h"
 
 bool fileExists (const std::string& name) {

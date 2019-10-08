@@ -2,7 +2,6 @@
 #ifndef PACKAGE_C_H
 #define PACKAGE_C_H
 
-#include <map>
 #include <vector>
 #include <set>
 

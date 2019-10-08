@@ -7,7 +7,7 @@
 int main(int argc, char *argv[]) {
 
   // Make the llvm module, which holds all the code.
-  mainModule = llvm::make_unique<llvm::Module>("GG Program", mainContext);
+  mainModule = llvm::make_unique<llvm::Module>("", mainContext);
 
   // Handle commandline args
   std::string compileFile;
